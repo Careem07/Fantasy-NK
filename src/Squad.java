@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Squad {
+public class Squad /*extends Score*/{
 	ArrayList<Player> Players;
 	String sName;
  	int playerCount = 0;
 	static final int maxnum = 15;
 	static final int minnum = 11;
+	int sum=0;
 	
 	public Squad(String sName ) 
 	   {
@@ -25,8 +26,14 @@ public class Squad {
 		 
 		this.Players.add(p);
 		this.playerCount++;
- 	   System.out.println("Player was added");
+        System.out.println("Player was added " + p.getName());
 	}
+	public void removePlayer(Player p) {
+		 
+		this.Players.remove(p);
+		this.playerCount--;
+        System.out.println("Player was removed " + p.getName());
+  }
 	
 	  public void getPlayerInfo(String pname) {
 		  
@@ -58,10 +65,16 @@ public class Squad {
 	  public int getCount() {
 		  return playerCount;
 	  }
+
+	  public int Calcpts() {
+		  sum=0;
+		for(int i=0;i<this.playerCount;i++)
+		{
+			sum+=this.Players.get(i).getPpoints();
+		}
+		return sum;
+	}
 	  
-	  public void removePlayer(String pname) {
-		  
-	  }
 	  }
 	  
   

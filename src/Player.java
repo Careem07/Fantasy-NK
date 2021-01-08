@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends Event{
 	   String name;
 	   String nationality;
 	   String Position;
 	   String Club;
 	   double Price;
 	   static int Countt=0;
+	   boolean goal = false;
+	   int points=0;
+
 	   
 	   public Player() 
 	   {
@@ -38,12 +41,13 @@ public class Player {
            System.out.println("Nationality: " + nationality);
            System.out.println("Position: " + Position);
            System.out.println("Club: " + Club);
+           System.out.println("Player points: " + points);
            System.out.println("------------------");
 	   }
 	   
 	   public  void Create(String name , String nationality , String Position , String Club)
 		{
-			this.name = name;
+			 this.name = name;
 			this.nationality = nationality;
 			this.Position=Position;
 			this.Club = Club;
@@ -61,8 +65,76 @@ public class Player {
 			Countt++;
 			
 		}
-		
 
+		/*int Calcpts() {
+			switch(this.getPosition()) {
+			  
+			case "GK":
+     	   {
+     		   this.score+=6;
+     		   break;
+     	   }
+     	   case "FWD" :
+     	   {
+     		   this.score+=4;
+     		   break;
+     	   }
+     	   case "DEF":
+     	   {
+     		   this.score+=6;
+     		   break;
+
+     	   }
+     	   case "MID":
+     	   {
+     		   this.score+=5;
+     		   break;
+     	   }
+
+         }
+			//p.setsum+=this.score;
+			return this.score;
+		}
+		*/
+		public int getPpoints() {
+		  return points;
+		}
+		public void goalMID()
+		{
+			this.points += 5;
+		}
+		public void goalFWD()
+		{
+			this.points +=4;
+		}
+		public void goalGK()
+		{
+			this.points += 6;
+		}
+		
+		public void goalDEF()
+		{
+			this.points += 6;
+		}
+		
+		public void assist()
+		{
+			this.points += 3;
+		}
+		public void yellowcard()
+		{
+			this.points -= 1;
+		}
+		public void redcard()
+		{
+			this.points -= 3;
+		}
+		public void owngoal()
+		{
+			this.points -= 2;
+		}
+         
+		
 		
 		
 }

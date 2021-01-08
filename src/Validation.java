@@ -35,7 +35,7 @@ public class Validation {
      boolean Register(String name , String password , String email , String FavTeam) throws IOException {
     	
     	 try {
-    		 File fil = new File("E:\\Java\\New folder\\FantasyPL\\src\\Logfile.txt");
+    		 File fil = new File("D:\\eclipse workspace\\FantasyPL\\src\\Logfile.TXT");
 			BufferedReader br = new BufferedReader(new FileReader(fil));
 			String linereader;
 			boolean checkname = false;

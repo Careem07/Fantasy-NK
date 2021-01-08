@@ -45,7 +45,6 @@ public class FantasyApp {
        
         else if (respond == 2)
         {
-        	
           	    System.out.println("Enter your email: ");
                 email = s.nextLine();
                 email += s.nextLine();
@@ -55,8 +54,6 @@ public class FantasyApp {
                 {
                 	 n= true;
                 }
-               
-
         }
         else if(respond == 3) {
         	System.exit(0);
@@ -72,9 +69,13 @@ public class FantasyApp {
         	System.out.println("1- Create player");
         	System.out.println("2- Create Squad");
         	System.out.println("3- Add player to squad");
-        	System.out.println("4- List players in existing squad");
-        	System.out.println("5- List players");
-        	System.out.println("6- Exit");
+        	System.out.println("4- Remove player from squad");
+        	System.out.println("5- Add Event");
+        	System.out.println("6- Get Squad score");
+        	System.out.println("7- List players in existing squad");
+        	System.out.println("8- List players");
+        	System.out.println("9- List Event");//gameweek
+        	System.out.println("10- Exit");
         	input = new Scanner(System.in);
         	choice = input.nextInt();
 
@@ -98,91 +99,276 @@ public class FantasyApp {
 			   sname = x.next();
 			   squads.add(new Squad(sname));
 			   System.out.println("Squad was created with name : "+ sname);
-        }
+           }
 			   
-		   else if ( choice == 3) {  
-			      Scanner ss= new Scanner(System.in);
-				   System.out.println("Which Squad do u want to add players to?");
-				   sname=ss.next();
-				   boolean b= false;
-				   for (int i = 0; i < squads.size() ; i++) 
-				   {
-					   if (squads.get(i).getsName().equals(sname)) {
-						   b=true;
-						   break;
-					   } 
+		   else if ( choice == 3)
+		   {
+				      Scanner ss= new Scanner(System.in);
+					   System.out.println("Which Squad do u want to add players to?");
+					   sname=ss.next();
+					   boolean b= false;
+					   int sq=0;
+					   for (int i = 0; i < squads.size() ; i++)
+					   {
+						   if (squads.get(i).getsName().equals(sname)) {
+							   b=true;
+							   sq=i;
+							   break;
+
+						   }
+					   }
+				          if(b)
+				          {
+				        	      Scanner integ = new Scanner(System.in);
+
+				        		  if (squads.get(sq).playerCount<=15) // squads.get(i).playerCount  >=11 &&
+				        		  {
+
+					    				   System.out.println("Which player do u want to add ?");
+					    				  pname = input.next();
+					    				  boolean f=false;
+					    				  int pl=0;
+					    				  for(int i=0;i<players.size();i++)
+					    		    	 if (players.get(i).name.equals(pname)) {
+						    		    		f=true;
+						    		    		pl=i; 
+						    		    		break;
+					    		    		}
+					    				  p=players.get(pl);
+					    				  if(f) {
+					    		    		 if(GK<=2 && FWD<=3 && MID<=5 && DEF<=5)
+					        	             {
+								        	   switch(p.Position)
+								        	   {
+									        	   case "GK":
+									        	   {
+									        		   GK++;
+									        		   break;
+									        	   }
+									        	   case "FWD" :
+									        	   {
+									        		   FWD++;
+									        		   break;
+									        	   }
+									        	   case "DEF":
+									        	   {
+									        		   DEF++;
+									        		   break;
+
+									        	   }
+									        	   case "MID":
+									        	   {
+									        		   MID++;
+									        		   break;
+									        	   }
+
+						        	            }
+								        	   squads.get(sq).addPlayer(p);
+
+					        	             }
+
+					    		    		 else
+						        		   {
+						        			   System.out.println(p.getName()+ " exceeds position limit");
+
+						        		   }
+
+					    		    			 }
+					    				  else
+					    				  {
+					    					  System.out.println("Player doesn't exist");
+					    				  }
+
+
+								       }
+				        		  else
+				        			  System.out.println("Squad is full");
+
+						       }
+
+
+				          else
+
+							   System.out.println("Squad doesn't exists");
+
+				          }
+		   else if (choice == 4) {
+			   
+			   Scanner kk= new Scanner(System.in);
+			   System.out.println("Which Squad do u want to remove players from?");
+			   sname=kk.next();
+			   boolean b= false;
+			   int sq=0;
+			   for (int i = 0; i < squads.size() ; i++)
+			   {
+				   if (squads.get(i).getsName().equals(sname)) {
+					   b=true;
+					   sq=i;
+					   break;
 				   }
-			          if(b)
-			          {
-			        	  Scanner integ = new Scanner(System.in);
-			        	  for ( int i = 0 ; i < squads.size() ; i++ ) 
-					       {  
-			        		  squads.get(i).setPlayerCount(i);
-			        		  if (squads.get(i).playerCount<=15) // squads.get(i).playerCount  >=11 &&
-			        		  {
-			        			
-				    				   System.out.println("Which player do u want to add ?");
-				    				  pname = input.next();
-				    		    	 if (players.get(i).name.equals(pname)) {
-				    		    		// squads.get(i).addPlayer(p);
-				    		    		 if(GK<=2 && FWD<=3 && MID<=5 && DEF<=5)
-				        	             {
-							        	   switch(players.get(i).Position)
-							        	   {
-								        	   case "GK":
-								        	   {   
-								        		   GK++;      
-								        		   break;
-								        	   }
-								        	   case "FWD" :
-								        	   {
-								        		   FWD++;
-								        		   break;
-								        	   }
-								        	   case "DEF":
-								        	   {  
-								        		   DEF++;
-								        		   break;
-								        	   
-								        	   }
-								        	   case "MID":
-								        	   {
-								        		   MID++;
-								        		   break;
-								        	   }
-								        	   
-					        	            }
-							        	  
-					    		    		
-				        	             }
-				    		    		 
-				    		    		 else
-					        		   {
-					        			   System.out.println(players.get(i-1).name+ " exceeds limit");
-					        			   break;
-					        		   }
-				    		    		squads.get(i).addPlayer(p);
-					    		        System.out.println("Player was added " + p.getName()); 
-							       }
-				    		  }
-			        		  else
-			        			  break;	 
-					       }
-			        		  
-			        	  }
-			          else
-					   
-						   System.out.println("Squad doesn't exists");
-					   
-			          }
-				       
-		   else if(choice == 4)
+			   }
+			   System.out.println("Which player do u want to remove ?");
+				  pname = input.next();
+				  boolean f=false;
+				  int pl=0;
+				  for(int i=0;i<players.size();i++) 
+				    	 if (players.get(i).name.equals(pname)) {
+		 		    		f=true;
+		 		    		pl=i; 
+		 		    		break;
+				    	 }
+						  p=players.get(pl);
+						  if(f) {
+		    		    		 if(GK<=2 && FWD<=3 && MID<=5 && DEF<=5)
+		        	             {
+					        	   switch(p.Position)
+					        	   {
+						        	   case "GK":
+						        	   {
+						        		   GK--;
+						        		   break;
+						        	   }
+						        	   case "FWD" :
+						        	   {
+						        		   FWD--;
+						        		   break;
+						        	   }
+						        	   case "DEF":
+						        	   {
+						        		   DEF--;
+						        		   break;
+
+						        	   }
+						        	   case "MID":
+						        	   {
+						        		   MID--;
+						        		   break;
+						        	   }
+
+			        	            }
+					        	   squads.get(sq).removePlayer(p);
+		        	             
+			   }
+			          
+				  }
+						  else
+    				  {
+    					  System.out.println("Player doesn't exist");
+    				  }
+		   }
+		    
+		   else if(choice==5) 
+		   {
+			     System.out.println("1- Forward score a goal");
+				 System.out.println("2- Midfielder score a goal");
+				 System.out.println("3- Defender score a goal");
+				 System.out.println("4- Goalkeeper score a goal");
+				 System.out.println("5- Player made an assist");
+				 System.out.println("6- Player got a yellow card");
+				 System.out.println("7- Player got a red card");
+				 System.out.println("8- Player conceded a goal");
+				 int c;
+				 Scanner cc=new Scanner (System.in);
+				 c=cc.nextInt();
+				 System.out.println("Which player?");
+				 pname = input.next();
+				 int pl=0;
+				  for(int i=0;i<players.size();i++)
+		    	 if (players.get(i).name.equals(pname)) {
+			    		pl=i; 
+			    		break;
+		    		}
+				  p=players.get(pl);
+				  
+				 switch (c)
+				 {
+					 case 1:
+					 {
+						if(p.getPosition().equals("FWD"))
+						{
+							p.goalFWD();
+							System.out.println(p.getName() + " Scored " + p.getPpoints() );
+						}
+						break;
+					 }
+					 case 2:
+					 {
+						 if(p.getPosition().equals("MID"))
+							{
+								p.goalMID();
+								System.out.println(p.getName() + " Scored " + p.getPpoints() );
+							}
+						 break;
+					 }
+					 case 3:
+					 {
+						 if(p.getPosition().equals("DEF"))
+							{
+								p.goalDEF();
+								System.out.println(p.getName() + " Scored " + p.getPpoints() );
+							}
+						 break;
+					 }
+					 case 4:
+					 {
+						 if(p.getPosition().equals("GK"))
+							{
+								p.goalGK();
+								System.out.println(p.getName() + " Scored " + p.getPpoints() );
+							}
+						 break;
+					 }
+					 case 5:
+					 {
+						p.assist(); 
+						System.out.println(p.getName() + " Made Assist " + p.getPpoints() );
+						break;
+					 }
+					 case 6:
+					 {
+						p.yellowcard(); 
+						System.out.println(p.getName() + " got yellow card " + p.getPpoints() );
+						break;
+					 }
+					 case 7:
+					 {
+						 p.redcard();
+						 System.out.println(p.getName() + " got red card " + p.getPpoints() );
+						 break;
+					 }
+					 case 8:
+					 {
+						 p.owngoal();
+						 System.out.println(p.getName() + " own goal  " + p.getPpoints() );
+						 break;
+					 }
+				 }
+			     
+		   }
+		   
+		   else if (choice == 6) {
+			   Scanner ss= new Scanner(System.in);
+			   System.out.println("Which Squad do u want to get score?");
+			   sname=ss.next();
+			   
+			   for (int i = 0; i < squads.size() ; i++) 
+			   { 
+				   if (squads.get(i).getsName().equals(sname)) {
+					   System.out.println("Squads points are " + squads.get(i).Calcpts()) ;  
+				   }
+			   
+		   }
+         }
+		   
+		   
+		   
+		   else if(choice == 7)
 		   {   
 			   Scanner ss= new Scanner(System.in);
 			   System.out.println("Which Squad do u want to list players?");
 			   sname=ss.next();
 			   
-			   for (int i = 0; i <= squads.size() ; i++) 
+			   for (int i = 0; i < squads.size() ; i++) 
 			   { 
 				   if (squads.get(i).getsName().equals(sname))
 				   {
@@ -192,24 +378,32 @@ public class FantasyApp {
 				   }
 				   
 			   }  
-		    
+	
+			   
 		   }
 		   
-		   else if(choice == 5)
+		   else if(choice == 8)
 		   {
 			   for(int ii=0; ii< players.size();ii++) 
 			   {
 				   players.get(ii).RetrivePlayer();  
 			   }
 		   }
-		   else if(choice == 6)
+		   
+		   else if(choice == 9)
+		   {
+			
+				
+
+		   }
+		   
+		   else if(choice == 10)
 		   {
 			 break;
 		   }
-}
-  
+		  
+        }
         }
 
 	}
 }
-
