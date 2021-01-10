@@ -9,6 +9,7 @@ public class Player extends Event{
 	   static int Countt=0;
 	   boolean goal = false;
 	   int points=0;
+	   int gameweek;
 
 	   
 	   public Player() 
@@ -66,36 +67,9 @@ public class Player extends Event{
 			
 		}
 
-		/*int Calcpts() {
-			switch(this.getPosition()) {
-			  
-			case "GK":
-     	   {
-     		   this.score+=6;
-     		   break;
-     	   }
-     	   case "FWD" :
-     	   {
-     		   this.score+=4;
-     		   break;
-     	   }
-     	   case "DEF":
-     	   {
-     		   this.score+=6;
-     		   break;
-
-     	   }
-     	   case "MID":
-     	   {
-     		   this.score+=5;
-     		   break;
-     	   }
-
-         }
-			//p.setsum+=this.score;
-			return this.score;
+		public int getGameweek() {
+			return gameweek;
 		}
-		*/
 		public int getPpoints() {
 		  return points;
 		}
