@@ -1,4 +1,3 @@
-
 abstract class Event {
 	Player p;
 	abstract void goalMID();
