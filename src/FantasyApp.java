@@ -45,6 +45,7 @@ public class FantasyApp {
        
         else if (respond == 2)
         {
+        	
           	    System.out.println("Enter your email: ");
                 email = s.nextLine();
                 email += s.nextLine();
@@ -54,6 +55,8 @@ public class FantasyApp {
                 {
                 	 n= true;
                 }
+               
+
         }
         else if(respond == 3) {
         	System.exit(0);
