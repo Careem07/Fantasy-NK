@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Squad /*extends Score*/{
+public class Squad {
 	ArrayList<Player> Players;
 	String sName;
  	int playerCount = 0;
@@ -70,6 +70,7 @@ public class Squad /*extends Score*/{
 		  sum=0;
 		for(int i=0;i<this.playerCount;i++)
 		{
+			System.out.println(this.Players.get(i).getPpoints() + " game week :" + this.Players.get(i).getGameweek());
 			sum+=this.Players.get(i).getPpoints();
 		}
 		return sum;
