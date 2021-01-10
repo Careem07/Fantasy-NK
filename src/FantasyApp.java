@@ -77,8 +77,8 @@ public class FantasyApp {
         	System.out.println("6- Get Squad score");
         	System.out.println("7- List players in existing squad");
         	System.out.println("8- List players");
-        	System.out.println("9- List Event");//gameweek
-        	System.out.println("10- Exit");
+        //	System.out.println("9- List Event");//gameweek
+        	System.out.println("9- Exit");
         	input = new Scanner(System.in);
         	choice = input.nextInt();
 
@@ -123,7 +123,7 @@ public class FantasyApp {
 				          if(b)
 				          {
 				        	      Scanner integ = new Scanner(System.in);
-
+				        	      Rules rule = new Rules();
 				        		  if (squads.get(sq).playerCount<=15) // squads.get(i).playerCount  >=11 &&
 				        		  {
 
@@ -139,42 +139,11 @@ public class FantasyApp {
 					    		    		}
 					    				  p=players.get(pl);
 					    				  if(f) {
-					    		    		 if(GK<=2 && FWD<=3 && MID<=5 && DEF<=5)
-					        	             {
-								        	   switch(p.Position)
-								        	   {
-									        	   case "GK":
-									        	   {
-									        		   GK++;
-									        		   break;
-									        	   }
-									        	   case "FWD" :
-									        	   {
-									        		   FWD++;
-									        		   break;
-									        	   }
-									        	   case "DEF":
-									        	   {
-									        		   DEF++;
-									        		   break;
-
-									        	   }
-									        	   case "MID":
-									        	   {
-									        		   MID++;
-									        		   break;
-									        	   }
-
-						        	            }
-								        	   squads.get(sq).addPlayer(p);
-
-					        	             }
-
-					    		    		 else
-						        		   {
-						        			   System.out.println(p.getName()+ " exceeds position limit");
-
-						        		   }
+					    					  	if( rule.checkclub(squads.get(sq) , p.getClub()))
+					    					  	{
+					    					  		//if(rule.checkpos(squads.get(sq) , p.getPosition())) 
+					    					  		squads.get(sq).addPlayer(p);	
+					    					  	}
 
 					    		    			 }
 					    				  else
@@ -275,6 +244,10 @@ public class FantasyApp {
 				 c=cc.nextInt();
 				 System.out.println("Which player?");
 				 pname = input.next();
+				 System.out.println("Which gameweek?");
+				 int g;
+				 g=cc.nextInt();
+				 p.gameweek=g;
 				 int pl=0;
 				  for(int i=0;i<players.size();i++)
 		    	 if (players.get(i).name.equals(pname)) {
@@ -290,7 +263,7 @@ public class FantasyApp {
 						if(p.getPosition().equals("FWD"))
 						{
 							p.goalFWD();
-							System.out.println(p.getName() + " Scored " + p.getPpoints() );
+							System.out.println(p.getName() + " Scored " + p.getPpoints() + " in gameweek " + g);
 						}
 						break;
 					 }
@@ -299,7 +272,7 @@ public class FantasyApp {
 						 if(p.getPosition().equals("MID"))
 							{
 								p.goalMID();
-								System.out.println(p.getName() + " Scored " + p.getPpoints() );
+								System.out.println(p.getName() + " Scored " + p.getPpoints() + " in gameweek " + g);
 							}
 						 break;
 					 }
@@ -308,7 +281,7 @@ public class FantasyApp {
 						 if(p.getPosition().equals("DEF"))
 							{
 								p.goalDEF();
-								System.out.println(p.getName() + " Scored " + p.getPpoints() );
+								System.out.println(p.getName() + " Scored " + p.getPpoints() + " in gameweek " + g);
 							}
 						 break;
 					 }
@@ -317,32 +290,32 @@ public class FantasyApp {
 						 if(p.getPosition().equals("GK"))
 							{
 								p.goalGK();
-								System.out.println(p.getName() + " Scored " + p.getPpoints() );
+								System.out.println(p.getName() + " Scored " + p.getPpoints() + " in gameweek " + g);
 							}
 						 break;
 					 }
 					 case 5:
 					 {
 						p.assist(); 
-						System.out.println(p.getName() + " Made Assist " + p.getPpoints() );
+						System.out.println(p.getName() + " Made Assist " + p.getPpoints() + " in gameweek " + g);
 						break;
 					 }
 					 case 6:
 					 {
 						p.yellowcard(); 
-						System.out.println(p.getName() + " got yellow card " + p.getPpoints() );
+						System.out.println(p.getName() + " got yellow card " + p.getPpoints() + " in gameweek " + g);
 						break;
 					 }
 					 case 7:
 					 {
 						 p.redcard();
-						 System.out.println(p.getName() + " got red card " + p.getPpoints() );
+						 System.out.println(p.getName() + " got red card " + p.getPpoints() + " in gameweek " + g );
 						 break;
 					 }
 					 case 8:
 					 {
 						 p.owngoal();
-						 System.out.println(p.getName() + " own goal  " + p.getPpoints() );
+						 System.out.println(p.getName() + " own goal  " + p.getPpoints() + " in gameweek " + g );
 						 break;
 					 }
 				 }
@@ -359,6 +332,7 @@ public class FantasyApp {
 				   if (squads.get(i).getsName().equals(sname)) {
 					   System.out.println("Squads points are " + squads.get(i).Calcpts()) ;  
 				   }
+				  
 			   
 		   }
          }
@@ -393,14 +367,14 @@ public class FantasyApp {
 			   }
 		   }
 		   
-		   else if(choice == 9)
+		   else if(choice == 10)
 		   {
 			
 				
 
 		   }
 		   
-		   else if(choice == 10)
+		   else if(choice == 9)
 		   {
 			 break;
 		   }
